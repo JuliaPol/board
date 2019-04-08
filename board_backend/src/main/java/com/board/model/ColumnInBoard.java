@@ -24,11 +24,11 @@ public class ColumnInBoard {
     @Max(15)
     private Integer number;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "column_status_id")
     private ColumnStatus columnStatus;
 

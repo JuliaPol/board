@@ -3,7 +3,9 @@ package com.board.controller;
 import com.board.dto.UserWithPasswordDTO;
 import com.board.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,15 +17,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/users/create")
-    public String createNewUser() {
-        UserWithPasswordDTO userDTO = new UserWithPasswordDTO();
-        userDTO.setLogin("login");
-        userDTO.setEmail("email@gmail.com");
-        userDTO.setFirstName("name");
-        userDTO.setLastName("surname");
-        userDTO.setPassword("password");
+    @RequestMapping(value = "/users/create", method = RequestMethod.POST)
+    public void createNewUser(@RequestBody UserWithPasswordDTO userDTO) {
         userService.createNewUser(userDTO);
-        return "";
     }
 }

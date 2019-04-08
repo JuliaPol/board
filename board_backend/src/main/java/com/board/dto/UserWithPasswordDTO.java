@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardCreationDTO {
-    private String name;
-
-    private String background;
+public class UserWithPasswordDTO extends UserDTO {
+    private String password;
 }

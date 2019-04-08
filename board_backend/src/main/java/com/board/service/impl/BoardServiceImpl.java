@@ -4,6 +4,7 @@ import com.board.dto.BoardCreationDTO;
 import com.board.model.Board;
 import com.board.model.User;
 import com.board.repository.BoardRepository;
+import com.board.repository.UserRepository;
 import com.board.service.BoardService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +15,31 @@ import java.util.Collections;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    private final BoardRepository boardRepository;
+    private BoardRepository boardRepository;
+    private UserRepository userRepository;
 
-    private final ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public BoardServiceImpl(BoardRepository boardRepository, ModelMapper modelMapper) {
+    public BoardServiceImpl(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
+    }
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
-    public void createNewBoard(BoardCreationDTO boardDTO) {
-        boardRepository.save(convertToEntity(boardDTO));
-    }
-
-    private Board convertToEntity(BoardCreationDTO boardCreationDTO) {
-        Board board = modelMapper.map(boardCreationDTO, Board.class);
-        User user = modelMapper.map(boardCreationDTO.getWhoCreate(), User.class);
+    public void createNewBoard(String username, BoardCreationDTO boardDTO) {
+        User user = userRepository.findByLogin(username);
+        Board board = modelMapper.map(boardDTO, Board.class);
         board.setUsers(Collections.singletonList(user));
-        return board;
+//        user.getBoards().add(board);
+        boardRepository.save(board);
     }
 }

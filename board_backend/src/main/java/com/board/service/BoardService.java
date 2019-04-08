@@ -4,5 +4,5 @@ import com.board.dto.BoardCreationDTO;
 
 public interface BoardService {
 
-    void createNewBoard(BoardCreationDTO boardDTO);
+    void createNewBoard(String username, BoardCreationDTO boardDTO);
 }

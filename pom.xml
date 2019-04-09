@@ -7,6 +7,11 @@
     <groupId>groupId</groupId>
     <artifactId>board</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
+    <modules>
+        <module>board_backend</module>
+        <module>board_frontend</module>
+    </modules>
     
 </project>

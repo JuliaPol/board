@@ -1,0 +1,10 @@
+version: "2.2"
+
+services:
+  db:
+    container_name: "db"
+    build:
+      context: .
+      dockerfile: Dockerfile.data
+    ports:
+      - "3306:3306"

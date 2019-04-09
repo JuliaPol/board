@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "column_status")
 public class ColumnStatus {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

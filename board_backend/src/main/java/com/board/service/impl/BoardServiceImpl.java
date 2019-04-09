@@ -47,24 +47,4 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.save(board);
     }
 
-    public void addNewColumn(String username, String board, NewColumnDTO newColumnDTO) {
-        User user = userRepository.findByLogin(username);
-        List<Board> boards = user.getBoards().stream()
-                .filter(board1 -> board1.getName().equals(board)).collect(Collectors.toList());
-        if (boards.size() > 0) {
-            Board foundBoard = boards.get(0);
-            ColumnInBoard columnInBoard = convertColumnToEntity(newColumnDTO);
-            foundBoard.getColumnInBoards().add(columnInBoard);
-            columnInBoard.setBoard(foundBoard);
-            boardRepository.save(foundBoard);
-        }
-    }
-
-    private ColumnInBoard convertColumnToEntity(NewColumnDTO newColumnDTO) {
-        ColumnInBoard columnInBoard = modelMapper.map(newColumnDTO, ColumnInBoard.class);
-        ColumnStatus columnStatus = new ColumnStatus();
-        columnStatus.setName(newColumnDTO.getStatus());
-        columnInBoard.setColumnStatus(columnStatus);
-        return columnInBoard;
-    }
 }

@@ -21,11 +21,4 @@ public class BoardController {
                             @RequestBody BoardCreationDTO boardCreationDTO) {
         boardService.createNewBoard(username, boardCreationDTO);
     }
-
-    @RequestMapping(value = "/{username}/boards/{board}", method = RequestMethod.POST)
-    public void createColumnInBoard(@PathVariable("username") String username,
-                                    @PathVariable("board") String board,
-                                    @RequestBody NewColumnDTO newColumnDTO) {
-        boardService.addNewColumn(username, board, newColumnDTO);
-    }
 }

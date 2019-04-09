@@ -4,13 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewColumnDTO {
+public class NewTaskDTO {
+
     private String name;
 
-    private String status;
+    private String description;
 
-    private String boardName;
+    private Date expirationDate;
+
+    private Long columnId;
 }

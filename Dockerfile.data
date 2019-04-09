@@ -1,9 +1,9 @@
-FROM mysql:8.0
+FROM mysql:5.7
 
 # Add a database
 ENV MYSQL_DATABASE board
-ENV MYSQL_USER=root
-ENV MYSQL_PASSWORD=root
+ENV MYSQL_USER=mysql
+ENV MYSQL_PASSWORD=mysql
 ENV MYSQL_ROOT_PASSWORD=root
 # Add the content of the sql-scripts/ directory to your image
 # All scripts in docker-entrypoint-initdb.d/ are automatically

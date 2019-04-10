@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ColumnRepository extends CrudRepository<ColumnInBoard, Long> {
+    ColumnInBoard findByColumnLink(String columnLink);
 }

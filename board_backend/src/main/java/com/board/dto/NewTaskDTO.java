@@ -3,7 +3,10 @@ package com.board.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -15,7 +18,18 @@ public class NewTaskDTO {
 
     private String description;
 
-    private Date expirationDate;
+    private String expirationDate;
 
-    private Long columnId;
+    private String columnLink;
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    //TODO: some strange things in DB. Date - 1
+    @SneakyThrows
+    public Date getExpirationDate() {
+        if (expirationDate != null) {
+            return dateFormat.parse(expirationDate);
+        }
+        return new Date();
+    }
 }

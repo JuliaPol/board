@@ -12,5 +12,5 @@ public class NewColumnDTO {
 
     private String status;
 
-    private String boardName;
+    private String boardLink;
 }

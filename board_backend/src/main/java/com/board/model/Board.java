@@ -20,6 +20,9 @@ public class Board {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "board_link", nullable = false)
+    private String boardLink;
+
     private String background;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)

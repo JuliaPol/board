@@ -21,6 +21,9 @@ public class ColumnInBoard {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "column_link", nullable = false)
+    private String columnLink;
+
     @Max(15)
     private Integer number;
 

@@ -14,9 +14,8 @@ public class ColumnController {
         this.columnService = columnService;
     }
 
-    @RequestMapping(value = "/{username}/newColumn", method = RequestMethod.POST)
-    public void addNewColumnToBoard(@PathVariable("username") String username,
-                                    @RequestBody NewColumnDTO newColumnDTO) {
-        columnService.addNewColumnToBoard(username, newColumnDTO);
+    @RequestMapping(value = "/columns/newColumn", method = RequestMethod.POST)
+    public void addNewColumnToBoard(@RequestBody NewColumnDTO newColumnDTO) {
+        columnService.addNewColumnToBoard(newColumnDTO);
     }
 }

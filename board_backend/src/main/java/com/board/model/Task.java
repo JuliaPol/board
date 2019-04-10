@@ -33,6 +33,9 @@ public class Task {
 
     private String email;
 
+    @Column(name = "task_link", nullable = false)
+    private String taskLink;
+
     @ManyToOne
     @JoinColumn(name = "task_marker_id")
     private TaskMarker taskMarker;

@@ -12,6 +12,7 @@ CREATE TABLE user (
 CREATE TABLE board (
   id         SERIAL PRIMARY KEY,
   name       VARCHAR(255) NOT NULL,
+  board_link VARCHAR(255) NOT NULL UNIQUE,
   background VARCHAR(255)
 )
   ENGINE = InnoDB
@@ -35,6 +36,7 @@ CREATE TABLE column_in_board (
   id               SERIAL PRIMARY KEY,
   name             VARCHAR(255) NOT NULL,
   number           INT UNSIGNED,
+  column_link      VARCHAR(255) NOT NULL UNIQUE,
   board_id         BIGINT REFERENCES board (id),
   column_status_id BIGINT REFERENCES column_status (id)
 )
@@ -49,6 +51,7 @@ CREATE TABLE task (
   date_of_creation DATE,
   expiration_date  DATE,
   email            VARCHAR(255),
+  task_link        VARCHAR(255) NOT NULL UNIQUE,
   task_marker_id   BIGINT REFERENCES task_marker (id)
 )
   ENGINE = InnoDB

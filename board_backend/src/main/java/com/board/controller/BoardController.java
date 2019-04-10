@@ -16,9 +16,8 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @RequestMapping(value = "/{username}/boards/create", method = RequestMethod.POST)
-    public void createBoard(@PathVariable("username") String username,
-                            @RequestBody BoardCreationDTO boardCreationDTO) {
-        boardService.createNewBoard(username, boardCreationDTO);
+    @RequestMapping(value = "/boards/create", method = RequestMethod.POST)
+    public void createBoard(@RequestBody BoardCreationDTO boardCreationDTO) {
+        boardService.createNewBoard(boardCreationDTO);
     }
 }

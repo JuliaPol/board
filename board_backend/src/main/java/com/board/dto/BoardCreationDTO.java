@@ -11,4 +11,6 @@ public class BoardCreationDTO {
     private String name;
 
     private String background;
+
+    private String username;
 }

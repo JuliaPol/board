@@ -7,6 +7,7 @@ import com.board.model.ColumnStatus;
 import com.board.repository.BoardRepository;
 import com.board.repository.ColumnRepository;
 import com.board.service.ColumnService;
+import com.board.service.LinkGenerationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class ColumnServiceImpl implements ColumnService {
     private ModelMapper modelMapper;
     private ColumnRepository columnRepository;
     private BoardRepository boardRepository;
+    private LinkGenerationService linkGenerationService;
 
     @Autowired
     public ColumnServiceImpl(ColumnRepository columnRepository) {
@@ -33,13 +35,20 @@ public class ColumnServiceImpl implements ColumnService {
         this.boardRepository = boardRepository;
     }
 
+    @Autowired
+    public void setLinkGenerationService(LinkGenerationService linkGenerationService) {
+        this.linkGenerationService = linkGenerationService;
+    }
+
     @Override
-    public void addNewColumnToBoard(String username, NewColumnDTO newColumnDTO) {
-        Board board = boardRepository.findBoardByNameAndUsersLogin(newColumnDTO.getBoardName(), username);
-        if (board != null) {
+    public void addNewColumnToBoard(NewColumnDTO newColumnDTO) {
+        String board = newColumnDTO.getBoardLink();
+        Board boardFound = boardRepository.findBoardByBoardLink(board);
+        if (boardFound != null) {
             ColumnInBoard columnInBoard = convertColumnToEntity(newColumnDTO);
-            board.getColumnInBoards().add(columnInBoard);
-            columnInBoard.setBoard(board);
+            columnInBoard.setColumnLink(linkGenerationService.getLinkForNewBoard(board, columnInBoard.getName()));
+            boardFound.getColumnInBoards().add(columnInBoard);
+            columnInBoard.setBoard(boardFound);
             columnRepository.save(columnInBoard);
         }
     }
